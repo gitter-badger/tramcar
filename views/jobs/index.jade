@@ -1,0 +1,24 @@
+extends ../layout.jade
+
+block title
+  title Jobs
+
+block content
+  h1 Latest Jobs
+
+  table
+    thead
+      tr
+        th Post Date
+        th Company
+        th Title
+        th Category
+    each job in jobs
+      tr
+        td= formatDate(job.createdAt)
+        td
+          a(href="/companies/#{job._company.id}")= job._company.name
+        td
+          a(href="/jobs/#{job.id}")= job.title
+        td
+          a(href="/categories/#{job._category.id}/jobs")= job._category.name

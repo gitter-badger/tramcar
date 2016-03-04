@@ -1,0 +1,52 @@
+extends ../layout.jade
+
+block title
+  title= job.title
+
+block content
+  h1 #{job.title} @ #{job._company.name}
+
+  div(style="float:left;")
+    div
+      h4 URL
+      p
+        a(href="#{job._company.url}")= job._company.url
+      h4 Twitter
+      p
+        a(href="https://twitter.com/#{job._company.twitter}")= job._company.twitter
+
+    if user && job._user.id == user.id
+      div
+        h4 Job Admin
+        h4 Status
+        if job.get('expired_at') == null
+          p Paid
+        else
+          p Expired
+
+
+        a(href="/jobs/#{job.get('id')}/edit") Edit
+
+        form(name="edit", action="/jobs/#{job.get('id')}/expire?_method=PUT", method="post", style="display:inline")
+          input(type="submit", value="Expire")
+
+        form(name="delete", action="/jobs/#{job.get('id')}?_method=DELETE", method="post", style="display:inline")
+          input(type="submit", value="Delete" style="display:inline")
+
+  div(style="float:left;")
+    h4 Category
+    p
+      a(href="/categories/#{job._category.id}/jobs")= job._category.name
+    h4 Date
+    p= formatDate(job.createdAt)
+    h4 Description
+    p(style='white-space:pre-wrap;')= job.get('description')
+    h4 Application Info
+    p(style='white-space:pre-wrap;')= job.get('application_info')
+    if job._country
+      h4 Country
+      p(style='white-space:pre-wrap;')= job._country.name
+    h4 Location
+    p(style='white-space:pre-wrap;')= job.get('location')
+    h4 E-mail
+    p(style='white-space:pre-wrap;')= job.get('email')

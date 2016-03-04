@@ -1,0 +1,18 @@
+extends ../layout.jade
+
+block title
+  title Create Category
+
+block content
+  h1 Create Category
+
+  if errors
+    p #{errors.length} error(s) prevented this job from saving
+    ol
+    for e in errors
+      li= e.msg
+
+  form(name="new", action="/categories", method="post")
+    h4 Name
+    input(type="text", name="name" value="#{category.name ? category.name : ''}")
+    input(type="submit", value="Submit" style="display:block;")

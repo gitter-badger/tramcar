@@ -1,0 +1,38 @@
+extends ../layout.jade
+
+block title
+  title= company.get('name')
+
+block content
+  h1= company.get('name')
+
+  div(style="float:left;")
+    h4 URL
+    p
+      a(href="#{company.url}")= company.url
+    h4 Twitter
+    p
+      a(href="https://twitter.com/#{company.twitter}")= company.twitter
+
+    if user && company._user.id == user.id
+      a(href='/companies/#{company.id}/edit') Edit
+
+      form(name="delete", action="/companies/#{company.get('id')}?_method=DELETE", method="post", style="display:inline")
+        input(type="submit", value="Delete" style="display:inline")
+
+  div(style="float:left;")
+    h4 Jobs
+
+    table
+      thead
+        tr
+          th Post Date
+          th Title
+          th Category
+      each job in company._jobs
+        tr
+          td= formatDate(job.created_at)
+          td
+            a(href="/jobs/#{job.id}")= job.title
+          td
+            a(href="/categories/#{job._category.id}/jobs")= job._category.name

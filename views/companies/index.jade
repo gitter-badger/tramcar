@@ -1,0 +1,18 @@
+extends ../layout.jade
+
+block title
+  title Companies
+
+block content
+  h1 Companies
+
+  table
+    thead
+      tr
+        th Name
+        th Job Count
+    each company in companies
+      tr
+        td
+          a(href="/companies/#{company._id}")= company.name
+        td= company._jobs.length

@@ -1,0 +1,13 @@
+extends ../layout.jade
+
+block title
+  title Categories
+
+block content
+  h1 Categories
+
+  table
+    each category in categories
+      tr
+        td
+          a(href="/categories/#{category.id}/jobs")= category.name

@@ -1,0 +1,53 @@
+extends ../layout.jade
+
+block title
+  title Edit Job
+
+block content
+  h1 Edit Job
+
+  if errors
+    p #{errors.length} error(s) prevented this job from saving
+    ol
+    for e in errors
+      li= e.msg
+
+  form(name="edit", action="/jobs/#{job.id}?_method=PUT", method="post")
+    h4 Company
+    select(name="_company")
+      option(value="" selected)
+      each company in companies
+        //- TODO: find a better way to do this
+        if job._company == company.id
+          option(value="#{company.id}" selected)= company.name
+        else
+          option(value="#{company.id}")= company.name
+    h4 Category
+    select(name="_category")
+      each category in categories
+        //- TODO: find a better way to do this
+        if job._category == category.id
+          option(value="#{category.id}" selected)= category.name
+        else
+          option(value="#{category.id}")= category.name
+    h4 Title
+    input(type="text", name="title" value="#{job.get('title')}")
+    h4 Description
+    textarea(name="description")= job.get('description')
+    h4 Application Info
+    textarea(name="application_info")= job.get('application_info')
+    h4 Country
+    select(name="_country")
+      option(value="" selected)
+      each country in countries
+        //- TODO: find a better way to do this
+        if job._country == country.id
+          option(value="#{country.id}" selected)= country.name
+        else
+          option(value="#{country.get('id')}")= country.get('name')
+    h4 Location
+    textarea(name="location")= job.get('location')
+    h4 E-mail
+    input(type="text", name="email" value="#{job.get('email')}", style="display:block")
+    input(type="submit", value="Update")
+    a(href="/jobs/#{job.get('id')}") Cancel

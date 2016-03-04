@@ -1,0 +1,23 @@
+extends ../layout.jade
+
+block title
+  title Edit Company
+
+block content
+  h1 Edit Company
+
+  if errors
+    p #{errors.length} error(s) prevented this job from saving
+    ol
+    for e in errors
+      li= e.msg
+
+  form(name="edit", action="/companies/#{company.get('id')}?_method=PUT", method="post")
+    h4 Name
+    input(type="text", name="name" value="#{company.get('name')}")
+    h4 URL
+    input(type="text", name="url" value="#{company.get('url')}")
+    h4 Twitter
+    input(type="text", name="twitter", value="#{company.get('twitter')}", style="display:block")
+    input(type="submit", value="Update")
+    a(href="/companies/#{company.get('id')}") Cancel

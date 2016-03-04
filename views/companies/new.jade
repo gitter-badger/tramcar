@@ -1,0 +1,22 @@
+extends ../layout.jade
+
+block title
+  title Post Company
+
+block content
+  h1 Post Company
+
+  if errors
+    p #{errors.length} error(s) prevented this job from saving
+    ol
+    for e in errors
+      li= e.msg
+
+  form(name="new", action="/companies", method="post")
+    h4 Name
+    input(type="text", name="name" value="#{company.name ? company.name : ''}")
+    h4 URL
+    input(type="text", name="url" value="#{company.url ? company.url : ''}")
+    h4 Twitter
+    input(type="text", name="twitter" value="#{company.twitter ? company.twitter : ''}")
+    input(type="submit", value="Submit" style="display:block;")
