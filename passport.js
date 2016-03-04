@@ -7,7 +7,7 @@ var strategy = new GoogleStrategy(
   {
     clientID: googleSecrets.clientID,
     clientSecret: googleSecrets.clientSecret,
-    callbackURL: 'http://localhost:3000/auth/google_oauth2/callback',
+    callbackURL: '/auth/google_oauth2/callback',
     passReqToCallback: true
   },
   function (req, accessToken, refreshToken, profile, cb) {

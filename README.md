@@ -10,6 +10,7 @@ With that said, we would love for your involvement so please do test what we hav
 
 #### 0.1.0
 
+- Display job description and application information using markdown
 - Add unique validation to models which should not have duplicate records
   (companies, categories, etc.)
  - Currently implemented at the database layer and in the controllers, but there
