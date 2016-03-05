@@ -13,10 +13,13 @@ block content
       li= e.msg
 
   form(name="new", action="/companies", method="post")
-    h4 Name
-    input(type="text", name="name" value="#{company.name ? company.name : ''}")
-    h4 URL
-    input(type="text", name="url" value="#{company.url ? company.url : ''}")
-    h4 Twitter
-    input(type="text", name="twitter" value="#{company.twitter ? company.twitter : ''}")
-    input(type="submit", value="Submit" style="display:block;")
+    div(class='form-group')
+      label(for='name') Name
+      input(name="name", type="text", class="form-control", value="#{company.name ? company.name : ''}")
+    div(class='form-group')
+      label(for='url') URL
+      input(name="url", type="text", class="form-control", value="#{company.url ? company.url : ''}")
+    div(class='form-group')
+      label(for='twitter') Twitter
+      input(name="twitter", type="text", class="form-control", value="#{company.twitter ? company.twitter : ''}")
+    button(type="submit", class="btn btn-default") Submit

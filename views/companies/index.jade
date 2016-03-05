@@ -6,13 +6,16 @@ block title
 block content
   h1 Companies
 
-  table
+  table(class='table')
     thead
       tr
         th Name
+        th Twitter
         th Job Count
     each company in companies
       tr
         td
           a(href="/companies/#{company._id}")= company.name
+        td
+          a(href="https://twitter.com/#{company.twitter}")= company.twitter
         td= company._jobs.length

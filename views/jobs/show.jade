@@ -6,19 +6,21 @@ block title
 block content
   h1 #{job.title} @ #{job._company.name}
 
-  div(style="float:left;")
-    div
-      h4 URL
+  div(class='row')
+    div(class='col-md-4')
+      h4
+        mark URL
       p
         a(href="#{job._company.url}")= job._company.url
-      h4 Twitter
+      h4
+        mark Twitter
       p
         a(href="https://twitter.com/#{job._company.twitter}")= job._company.twitter
 
-    if user && job._user.id == user.id
-      div
+      if user && job._user.id == user.id
         h4 Job Admin
-        h4 Status
+        h4
+          mark Status
         if job.get('expired_at') == null
           p Paid
         else
@@ -32,21 +34,27 @@ block content
 
         form(name="delete", action="/jobs/#{job.get('id')}?_method=DELETE", method="post", style="display:inline")
           input(type="submit", value="Delete" style="display:inline")
-
-  div(style="float:left;")
-    h4 Category
-    p
-      a(href="/categories/#{job._category.id}/jobs")= job._category.name
-    h4 Date
-    p= formatDate(job.createdAt)
-    h4 Description
-    p(style='white-space:pre-wrap;')= job.get('description')
-    h4 Application Info
-    p(style='white-space:pre-wrap;')= job.get('application_info')
-    if job._country
-      h4 Country
-      p(style='white-space:pre-wrap;')= job._country.name
-    h4 Location
-    p(style='white-space:pre-wrap;')= job.get('location')
-    h4 E-mail
-    p(style='white-space:pre-wrap;')= job.get('email')
+    div(class='col-md-8')
+      h4
+        mark Category
+      p
+        a(href="/categories/#{job._category.id}/jobs")= job._category.name
+      h4
+        mark Date
+      p= formatDate(job.createdAt)
+      h4
+        mark Description
+      p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.get('description')))
+      h4
+        mark Application Info
+      p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.get('application_info')))
+      if job._country
+        h4
+          mark Country
+        p(style='white-space:pre-wrap;')= job._country.name
+      h4
+        mark Location
+      p(style='white-space:pre-wrap;')= job.get('location')
+      h4
+        mark E-mail
+      p(style='white-space:pre-wrap;')= job.get('email')

@@ -13,40 +13,48 @@ block content
       li= e.msg
 
   form(name="new", action="/jobs", method="post")
-    h4 Company
-    select(name="_company")
-      option(value="" selected)
-      each company in companies
-        //- TODO: find a better way to do this
-        if job._company && job._company == company.id
-          option(value="#{company.id}" selected)= company.name
-        else
-          option(value="#{company.id}")= company.name
-    h4 Category
-    select(name="_category")
-      each category in categories
-        //- TODO: find a better way to do this
-        if job._category && job._category == category.id
-          option(value="#{category.id}" selected)= category.name
-        else
-          option(value="#{category.id}")= category.name
-    h4 Title
-    input(type="text", name="title" value="#{job.title ? job.title : ''}")
-    h4 Description
-    textarea(name="description") #{job.description ? job.description : ''}
-    h4 Application Info
-    textarea(name="application_info") #{job.application_info ? job.application_info : ''}
-    h4 Country
-    select(name="_country")
-      option(value="" selected)
-      each country in countries
-        //- TODO: find a better way to do this
-        if job._country && job._country == country.id
-          option(value="#{country.id}" selected)= country.name
-        else
-          option(value="#{country.id}")= country.name
-    h4 Location
-    textarea(name="location") #{job.location ? job.location : ''}
-    h4 E-mail
-    input(type="text", name="email" value="#{job.email ? job.email : ''}")
-    input(type="submit", value="Submit" style="display:block;")
+    div(class='form-group')
+      label(for='_company') Company
+      select(name="_company", class='form-control')
+        option(value="" selected)
+        each company in companies
+          //- TODO: find a better way to do this
+          if job._company && job._company == company.id
+            option(value="#{company.id}" selected)= company.name
+          else
+            option(value="#{company.id}")= company.name
+    div(class='form-group')
+      label(for='_category') Category
+      select(name="_category", class='form-control')
+        each category in categories
+          //- TODO: find a better way to do this
+          if job._category && job._category == category.id
+            option(value="#{category.id}" selected)= category.name
+          else
+            option(value="#{category.id}")= category.name
+    div(class='form-group')
+      label(for='title') Title
+      input(name="title", type="text", class='form-control', value="#{job.title ? job.title : ''}")
+    div(class='form-group')
+      label(for='description') Description
+      textarea(name="description", rows='20', class='form-control') #{job.description ? job.description : ''}
+    div(class='form-group')
+      label(for='application_info') Application Info
+      textarea(name="application_info", rows='2', class='form-control') #{job.application_info ? job.application_info : ''}
+    div(class='form-group')
+      label(for='_country') Country
+      select(name="_country", class='form-control')
+        option(value="" selected)
+        each country in countries
+          //- TODO: find a better way to do this
+          if job._country && job._country == country.id
+            option(value="#{country.id}" selected)= country.name
+          else
+            option(value="#{country.id}")= country.name
+    div(class='form-group')
+      label(for='location') Location
+      textarea(name="location", class='form-control') #{job.location ? job.location : ''}
+    div(class='form-group')
+      label(for='email') E-mail
+      input(name="email", type="text", class='form-control', value="#{job.email ? job.email : ''}")
+    button(type="submit", class="btn btn-default") Submit

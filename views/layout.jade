@@ -3,22 +3,28 @@ html
   head
     block title
       title Default title
+    link(rel='stylesheet',
+         href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+         integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7',
+         crossorigin='anonymous')
   body
-    //- this preserves the space between tags
-    p
-      a(href='/jobs/') Home
-      | &nbsp;
-      a(href='/categories') Categories
-      | &nbsp;
-      a(href='/companies') Companies
-      | &nbsp;
-      if ! user
-        a(href='/auth/google_oauth2') Login
-      else
-        a(href='/companies/new') Add Company
-        | &nbsp;
-        a(href='/jobs/new') Post Job
-        | &nbsp;
-        a(href='/logout') Logout
+    div(class='container')
+      ul(class='nav nav-tabs')
+        li(role='presentation',class='active')
+          a(href='/jobs/') Home
+        li(role='presentation')
+          a(href='/categories') Categories
+        li(role='presentation')
+          a(href='/companies') Companies
+        if !user
+          li(role='presentation')
+            a(href='/auth/google_oauth2') Login
+        else
+          li(role='presentation')
+            a(href='/companies/new') Add Company
+          li(role='presentation')
+            a(href='/jobs/new') Post Job
+          li(role='presentation')
+            a(href='/logout') Logout
 
-    block content
+      block content

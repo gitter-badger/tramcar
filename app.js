@@ -23,6 +23,10 @@ var formatDate = require('./utils')['formatDate'];
 var mongoose = require('./db');
 var passport = require('./passport');
 
+// Markdown
+var showdown = require('showdown');
+var sanitizeHtml = require('sanitize-html');
+
 var app = express();
 
 var setSiteDetails = function (req, res, next) {
@@ -90,5 +94,7 @@ if (app.get('env') === 'development') {
 }
 
 app.locals.formatDate = formatDate;
+app.locals.converter = new showdown.Converter();
+app.locals.sanitizeHtml = sanitizeHtml;
 
 module.exports = app;
