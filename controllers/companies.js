@@ -79,7 +79,20 @@ var companiesController = {
         } else {
           company
             .update(req.body, function (err) {
-              res.redirect('/companies/' + company.id);
+              if (err) {
+                // Need to find a way to move this into middleware etc.
+                if (err.code === 11000) {
+                  var error = {};
+                  error.param = 'name';
+                  error.msg = 'Duplicate name';
+                  error.value = '';
+                  res.render('companies/edit', {company: company, errors: [error]});
+                } else {
+                  next(err);
+                }
+              } else {
+                res.redirect('/companies/' + company.id);
+              }
             });
         }
       }

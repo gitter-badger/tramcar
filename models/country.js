@@ -1,7 +1,7 @@
 var mongoose = require('../db');
 
 var countrySchema = mongoose.Schema({
-  name: String
+  name: { type: String, required: true, unique: true },
 });
 
 var Country = mongoose.model('Country', countrySchema);
