@@ -10,16 +10,17 @@ With that said, we would love for your involvement so please do test what we hav
 
 #### 0.1.0
 
-- Write mongoose validator middleware which throws appropriate message when a
-  duplicate duplicate record is saved
- - Currently implemented at the database layer and in the controllers, but there
-   has to be a better way to handle this with mongoose
+- Fix all eslint handle-callback-err errors
 - Add country fixtures so you can easily populate database on new deploy
 - Test tramcar on a non-localhost deploy with a non-localhost MongoDB
   installation
 
 #### Short-term
 
+- Write mongoose validator middleware which throws appropriate message when a
+  duplicate duplicate record is saved
+ - Currently implemented at the database layer and in the controllers, but there
+   has to be a better way to handle this with mongoose
 - Look at mongoose's browser validations to replace express-validator
   middleware
 - Fix supertest tests to work w/ authenticated users so we can create
@@ -28,6 +29,7 @@ With that said, we would love for your involvement so please do test what we hav
 - Add admin flag to user model and allow admin users to do anything to any job
 - Send tweet when job has been posted
 - Add mailing list integration (mailchimp?)
+- Add payment integration (Stripe?)
 - Send an e-mail when a job expires
 - Indicate in job listings if you have clicked on a job (change link colour or
   similar?)
@@ -37,3 +39,5 @@ With that said, we would love for your involvement so please do test what we hav
 
 - Investigate alternate to markdown for formatting of job description and
   application information (pure HTML?)
+- Multi-language support
+- Add ability to override templates

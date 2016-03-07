@@ -1,10 +1,10 @@
 extends ../layout.jade
 
 block title
-  title= company.get('name')
+  title= company.name
 
 block content
-  h1= company.get('name')
+  h1= company.name
 
   div(class='row')
     div(class='col-md-4')
@@ -20,7 +20,7 @@ block content
       if user && company._user.id == user.id
         a(href='/companies/#{company.id}/edit') Edit
 
-        form(name="delete", action="/companies/#{company.get('id')}?_method=DELETE", method="post", style="display:inline")
+        form(name="delete", action="/companies/#{company.id}?_method=DELETE", method="post", style="display:inline")
           input(type="submit", value="Delete" style="display:inline")
 
     div(class='col-md-8')

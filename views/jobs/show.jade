@@ -21,18 +21,18 @@ block content
         h4 Job Admin
         h4
           mark Status
-        if job.get('expired_at') == null
+        if job.expired_at == null
           p Paid
         else
           p Expired
 
 
-        a(href="/jobs/#{job.get('id')}/edit") Edit
+        a(href="/jobs/#{job.id}/edit") Edit
 
-        form(name="edit", action="/jobs/#{job.get('id')}/expire?_method=PUT", method="post", style="display:inline")
+        form(name="edit", action="/jobs/#{job.id}/expire?_method=PUT", method="post", style="display:inline")
           input(type="submit", value="Expire")
 
-        form(name="delete", action="/jobs/#{job.get('id')}?_method=DELETE", method="post", style="display:inline")
+        form(name="delete", action="/jobs/#{job.id}?_method=DELETE", method="post", style="display:inline")
           input(type="submit", value="Delete" style="display:inline")
     div(class='col-md-8')
       h4
@@ -44,17 +44,17 @@ block content
       p= formatDate(job.createdAt)
       h4
         mark Description
-      p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.get('description')))
+      p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.description))
       h4
         mark Application Info
-      p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.get('application_info')))
+      p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.application_info))
       if job._country
         h4
           mark Country
         p(style='white-space:pre-wrap;')= job._country.name
       h4
         mark Location
-      p(style='white-space:pre-wrap;')= job.get('location')
+      p(style='white-space:pre-wrap;')= job.location
       h4
         mark E-mail
-      p(style='white-space:pre-wrap;')= job.get('email')
+      p(style='white-space:pre-wrap;')= job.email

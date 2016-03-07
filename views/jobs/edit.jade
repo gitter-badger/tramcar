@@ -34,13 +34,13 @@ block content
             option(value="#{category.id}")= category.name
     div(class='form-group')
       label(for='title') Title
-      input(name="title", type="text", class='form-control', value="#{job.get('title')}")
+      input(name="title", type="text", class='form-control', value="#{job.title}")
     div(class='form-group')
       label(for='description') Description
-      textarea(name="description", rows='20', class='form-control')= job.get('description')
+      textarea(name="description", rows='20', class='form-control')= job.description
     div(class='form-group')
       label(for='application_info') Application Info
-      textarea(name="application_info", rows='2', class='form-control')= job.get('application_info')
+      textarea(name="application_info", rows='2', class='form-control')= job.application_info
     div(class='form-group')
       label(for='_country') Country
       select(name="_country", class='form-control')
@@ -50,12 +50,12 @@ block content
           if job._country == country.id
             option(value="#{country.id}" selected)= country.name
           else
-            option(value="#{country.get('id')}")= country.get('name')
+            option(value="#{country.id}")= country.name
     div(class='form-group')
       label(for='location') Location
-      textarea(name="location", class='form-control')= job.get('location')
+      textarea(name="location", class='form-control')= job.location
     div(class='form-group')
       label(for='email') E-mail
-      input(name="email", type="text", class='form-control', value="#{job.get('email')}", style="display:block")
+      input(name="email", type="text", class='form-control', value="#{job.email}", style="display:block")
     button(type="submit", class="btn btn-default") Update
-    a(href="/jobs/#{job.get('id')}") Cancel
+    a(href="/jobs/#{job.id}") Cancel
