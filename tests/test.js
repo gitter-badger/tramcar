@@ -1,7 +1,9 @@
 var request = require('supertest');
 var app = require('../app');
+var mongoose = require('../db');
 var Category = require('../models/category');
 var Company = require('../models/company');
+var Country = require('../models/country');
 var Job = require('../models/job');
 var Site = require('../models/site');
 var User = require('../models/user');
@@ -13,6 +15,11 @@ var user;
 var site;
 
 before(function (done) {
+  mongoose.connection.db.dropDatabase();
+
+  country = new Country({name: 'Canada'});
+  country.save();
+
   site = new Site({hostname: 'www.tramcar.org', displayName: 'Tramcar', defaultSite: true});
   site.save();
 
@@ -29,6 +36,7 @@ before(function (done) {
                  _user: user._id,
                  _company: company._id,
                  _category: category._id,
+                 _country: country._id,
                  title: 'test',
                  description: 'test',
                  application_info: 'test',
