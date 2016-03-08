@@ -10,6 +10,8 @@ describe('category', function () {
   });
 
   describe('saving', function () {
+    var site;
+
     before(function (done) {
       site = new Site({hostname: 'www.tramcar.org', displayName: 'Tramcar', defaultSite: true});
       site.save();
@@ -22,7 +24,7 @@ describe('category', function () {
     });
 
     it('saves new record', function (done) {
-      category = new Category({_site: site._id, name: 'test'});
+      var category = new Category({_site: site._id, name: 'test'});
       category.save(function (err) {
         should.not.exist(err);
         done();
@@ -30,32 +32,32 @@ describe('category', function () {
     });
 
     it('does not save duplicate record', function (done) {
-      category = new Category({_site: site._id, name: 'test'});
+      var category = new Category({_site: site._id, name: 'test'});
       category.save(function (err) {
-        duplicate = new Category({_site: site._id, name: 'test'});
-          duplicate.save(function (err) {
-            should.exist(err);
-            done();
-          });
+        var duplicate = new Category({_site: site._id, name: 'test'});
+        duplicate.save(function (err) {
+          should.exist(err);
+          done();
+        });
       });
     });
 
     it('does not save without a name', function (done) {
-      category = new Category({_site: site._id});
+      var category = new Category({_site: site._id});
       category.save(function (err) {
         should.exist(err);
         err.errors.name.message.should.equal('name cannot be blank');
         done();
       });
-    })
+    });
 
     it('does not save without a _site reference', function (done) {
-      category = new Category({name: 'test'});
+      var category = new Category({name: 'test'});
       category.save(function (err) {
         should.exist(err);
         err.errors._site.message.should.equal('_site cannot be blank');
         done();
       });
-    })
+    });
   });
 });

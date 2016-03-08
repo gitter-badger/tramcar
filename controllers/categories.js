@@ -13,12 +13,14 @@ var categoriesController = {
   },
   jobsAction: function jobsAction (req, res, next) {
     Category.findOne({_site: req.siteID, _id: req.params.id}, function (err, category) {
+      if (err) next(err);
       if (category) {
         Job
           .find({_site: req.siteID, _category: category.id})
           .populate('_company _category')
           .sort({created_at: -1})
           .exec(function (err, jobs) {
+            if (err) next(err);
             res.render('jobs/index', {jobs: jobs});
           });
       } else {

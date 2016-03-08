@@ -71,6 +71,7 @@ var companiesController = {
     var errors = req.validationErrors();
 
     Company.findOne({_site: req.siteID, _id: req.params.id}, function (err, company) {
+      if (err) next(err);
       if (company) {
         if (errors) {
           // We add req.params.id to req.body as we need it to populate the edit view
@@ -100,6 +101,7 @@ var companiesController = {
   },
   editAction: function editAction (req, res, next) {
     Company.findOne({_site: req.siteID, _id: req.params.id}, function (err, company) {
+      if (err) next(err);
       if (company) {
         res.render('companies/edit', {company: company});
       } else {
@@ -111,6 +113,7 @@ var companiesController = {
   //       if the company has jobs assigned to it.
   deleteAction: function deleteAction (req, res, next) {
     Company.findOne({_site: req.siteID, _id: req.params.id}, function (err, company) {
+      if (err) next(err);
       if (company) {
         if (company._jobs.length > 0) {
           // TODO: We need to notify the user why the company has not been deleted

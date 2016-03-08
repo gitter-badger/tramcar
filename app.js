@@ -31,11 +31,13 @@ var app = express();
 
 var setSiteDetails = function (req, res, next) {
   Site.findOne({hostname: req.hostname}, function (err, site) {
+    if (err) next(err);
     if (site) {
       req.siteID = site._id;
       next();
     } else {
       Site.findOne({defaultSite: true}, function (err, site) {
+        if (err) next(err);
         if (site) {
           req.siteID = site._id;
           next();

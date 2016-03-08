@@ -14,9 +14,12 @@ With that said, we would love for your involvement so please do test what we hav
 - Add country fixtures so you can easily populate database on new deploy
 - Test tramcar on a non-localhost deploy with a non-localhost MongoDB
   installation
+- Complete all model tests
 
 #### Short-term
 
+- Bump eslint to ^2.3.0
+- Integrate GitHub with Travis CI so we can catch errors on PRs
 - Write mongoose validator middleware which throws appropriate message when a
   duplicate duplicate record is saved
  - Currently implemented at the database layer and in the controllers, but there

@@ -2,6 +2,7 @@
   "name": "tramcar",
   "version": "0.1.0",
   "description": "job board",
+  "repository": "https://github.com/wfhio/tramcar",
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development node_modules/nodemon/bin/nodemon.js index.js",

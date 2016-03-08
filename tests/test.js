@@ -10,6 +10,7 @@ var User = require('../models/user');
 
 var category;
 var company;
+var country;
 var job;
 var user;
 var site;

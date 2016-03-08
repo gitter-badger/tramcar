@@ -13,6 +13,7 @@ var jobsController = {
       })
       .populate('_company _category').sort({createdAt: -1})
       .exec(function (err, jobs) {
+        if (err) next(err);
         res.render('jobs/index', {jobs: jobs});
       });
   },
@@ -39,8 +40,11 @@ var jobsController = {
 
     if (errors) {
       Company.find({_site: req.siteID}, function (err, companies) {
+        if (err) next(err);
         Country.find(function (err, countries) {
+          if (err) next(err);
           Category.find({_site: req.siteID}, function (err, categories) {
+            if (err) next(err);
             res.render('jobs/new', {job: job, errors: errors, categories: categories, companies: companies, countries: countries});
           });
         });
@@ -51,6 +55,7 @@ var jobsController = {
         res.redirect('/jobs/' + job.id);
       });
       Company.findOne({_site: req.siteID, _id: job._company}, function (err, company) {
+        if (err) next(err);
         company._jobs.push(job);
         company.save();
       });
@@ -58,8 +63,11 @@ var jobsController = {
   },
   newAction: function newAction (req, res, next) {
     Company.find({_site: req.siteID}, function (err, companies) {
+      if (err) next(err);
       Country.find(function (err, countries) {
+        if (err) next(err);
         Category.find({_site: req.siteID}, function (err, categories) {
+          if (err) next(err);
           var job = new Job();
           res.render('jobs/new', {job: job, categories: categories, companies: companies, countries: countries});
         });
@@ -71,6 +79,7 @@ var jobsController = {
       .findOne({_site: req.siteID, _id: req.params.id})
       .populate('_company _category _country _user')
       .exec(function (err, job) {
+        if (err) next(err);
         if (job) {
           res.render('jobs/show', {job: job});
         } else {
@@ -89,11 +98,15 @@ var jobsController = {
     var errors = req.validationErrors();
 
     Job.findOne({_site: req.siteID, _id: req.params.id}, function (err, job) {
+      if (err) next(err);
       if (job) {
         if (errors) {
           Company.find({_site: req.siteID}, function (err, companies) {
+            if (err) next(err);
             Country.find(function (err, countries) {
+              if (err) next(err);
               Category.find({_site: req.siteID}, function (err, categories) {
+                if (err) next(err);
                 job.set(req.body);
                 res.render('jobs/edit', {job: job, errors: errors, categories: categories, companies: companies, countries: countries});
               });
@@ -107,6 +120,7 @@ var jobsController = {
           }
           job
             .update(req.body, function (err) {
+              if (err) next(err);
               res.redirect('/jobs/' + job.id);
             });
         }
@@ -115,10 +129,14 @@ var jobsController = {
   },
   editAction: function editAction (req, res, next) {
     Job.findOne({_site: req.siteID, _id: req.params.id}, function (err, job) {
+      if (err) next(err);
       if (job) {
         Company.find({_site: req.siteID}, function (err, companies) {
+          if (err) next(err);
           Country.find(function (err, countries) {
+            if (err) next(err);
             Category.find({_site: req.siteID}, function (err, categories) {
+              if (err) next(err);
               res.render('jobs/edit', {job: job, categories: categories, companies: companies, countries: countries});
             });
           });
@@ -128,13 +146,16 @@ var jobsController = {
   },
   deleteAction: function deleteAction (req, res, next) {
     Job.remove({_site: req.siteID, _id: req.params.id}, function (err, job) {
+      if (err) next(err);
       res.redirect('/jobs');
     });
   },
   expireAction: function expireAction (req, res, next) {
     Job.findOne({_site: req.siteID, _id: req.params.id}, function (err, job) {
+      if (err) next(err);
       job
         .update({expired_at: new Date()}, function (err) {
+          if (err) next(err);
           res.redirect('/jobs/' + job.id);
         });
     });
