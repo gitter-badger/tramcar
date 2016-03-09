@@ -5,7 +5,9 @@ var Site = require('../../models/site');
 
 describe('category', function () {
   before(function (done) {
-    mongoose.connection.db.dropDatabase();
+    //mongoose.connection.db.dropDatabase();
+    Category.remove().exec();
+    Site.remove().exec();
     done();
   });
 
