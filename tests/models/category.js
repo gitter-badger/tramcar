@@ -1,13 +1,18 @@
+var db = require('../../db');
 var should = require('should');
-var mongoose = require('../../db');
 var Category = require('../../models/category');
 var Site = require('../../models/site');
 
 describe('category', function () {
   before(function (done) {
-    //mongoose.connection.db.dropDatabase();
+    db.openConnection();
     Category.remove().exec();
     Site.remove().exec();
+    done();
+  });
+
+  after(function (done) {
+    db.closeConnection();
     done();
   });
 
@@ -36,6 +41,7 @@ describe('category', function () {
     it('does not save duplicate record', function (done) {
       var category = new Category({_site: site._id, name: 'test'});
       category.save(function (err) {
+        if (err) throw err;
         var duplicate = new Category({_site: site._id, name: 'test'});
         duplicate.save(function (err) {
           should.exist(err);

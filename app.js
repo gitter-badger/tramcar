@@ -20,7 +20,8 @@ var jobs = require('./routes/jobs')(urlencodedParser);
 var MongoStore = require('connect-mongo')(session);
 var cookieSecrets = require('./secrets')['cookie'];
 var formatDate = require('./utils')['formatDate'];
-var mongoose = require('./db');
+var mongoose = require('mongoose');
+var db = require('./db');
 var passport = require('./passport');
 
 // Markdown
@@ -28,6 +29,8 @@ var showdown = require('showdown');
 var sanitizeHtml = require('sanitize-html');
 
 var app = express();
+
+db.openConnection();
 
 var setSiteDetails = function (req, res, next) {
   Site.findOne({hostname: req.hostname}, function (err, site) {

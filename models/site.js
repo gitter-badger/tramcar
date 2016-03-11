@@ -1,4 +1,4 @@
-var mongoose = require('../db');
+var mongoose = require('mongoose');
 
 var siteSchema = mongoose.Schema({
   hostname: { type: String, required: true },

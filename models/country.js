@@ -1,4 +1,4 @@
-var mongoose = require('../db');
+var mongoose = require('mongoose');
 
 var countrySchema = mongoose.Schema({
   name: { type: String, required: true, unique: true }
