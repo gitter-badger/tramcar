@@ -1,15 +1,20 @@
+var db = require('../../db');
 var should = require('should');
-var mongoose = require('../../db');
 var Company = require('../../models/company');
 var Site = require('../../models/site');
 var User = require('../../models/user');
 
 describe('company', function () {
   before(function (done) {
+    db.openConnection();
     Company.remove().exec();
     User.remove().exec();
     Site.remove().exec();
-    //mongoose.connection.db.dropDatabase();
+    done();
+  });
+
+  after(function (done) {
+    db.closeConnection();
     done();
   });
 
@@ -41,6 +46,7 @@ describe('company', function () {
     it('does not save duplicate record', function (done) {
       var company = new Company({_site: site._id, _user: user.id, name: 'Tramcar', url: 'https://www.tramcar.org'});
       company.save(function (err) {
+        if (err) throw err;
         var duplicate = new Company({_site: site._id, _user: user.id, name: 'Tramcar', url: 'https://www.tramcar.org'});
         duplicate.save(function (err) {
           should.exist(err);
@@ -67,9 +73,8 @@ describe('company', function () {
       });
     });
 
-
     it('does not save without a _site reference', function (done) {
-      var company = new Company({_user: user.id, name: 'Tramcar', url: 'https://www.tramcar.org'})
+      var company = new Company({_user: user.id, name: 'Tramcar', url: 'https://www.tramcar.org'});
       company.save(function (err) {
         should.exist(err);
         err.errors._site.message.should.equal('_site cannot be blank');
@@ -78,13 +83,12 @@ describe('company', function () {
     });
 
     it('does not save without a _user reference', function (done) {
-      var company = new Company({_site: site._id, name: 'Tramcar', url: 'https://www.tramcar.org'})
+      var company = new Company({_site: site._id, name: 'Tramcar', url: 'https://www.tramcar.org'});
       company.save(function (err) {
         should.exist(err);
         err.errors._user.message.should.equal('_user cannot be blank');
         done();
       });
     });
-
   });
 });

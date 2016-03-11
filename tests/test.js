@@ -51,10 +51,15 @@ after(function (done) {
   // NOTE: Not sure why we need to nest these but not the creations above,
   // however these don't seem to remove when we don't.
   category.remove(function (err, r) {
+    if (err) throw err;
     company.remove(function (err, r) {
+      if (err) throw err;
       user.remove(function (err, r) {
+        if (err) throw err;
         site.remove(function (err, r) {
+          if (err) throw err;
           job.remove(function (err, r) {
+            if (err) throw err;
             done();
           });
         });
