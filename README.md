@@ -10,10 +10,7 @@ With that said, we would love for your involvement so please do test what we hav
 
 #### 0.1.0
 
-- Fix all eslint handle-callback-err errors
 - Add country fixtures so you can easily populate database on new deploy
-- Test tramcar on a non-localhost deploy with a non-localhost MongoDB
-  installation
 - Complete all model tests
 
 #### Short-term
