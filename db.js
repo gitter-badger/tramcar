@@ -4,7 +4,7 @@ var connection = require('./secrets')['mongo'][env]['connection'];
 
 var db = {
   openConnection: function openConnection () {
-    mongoose.connect('mongodb://localhost/' + connection.database);
+    mongoose.connect('mongodb://' + connection.host + '/' + connection.database);
 
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
