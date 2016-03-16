@@ -27,12 +27,13 @@ $ git clone https://github.com/wfhio/tramcar
 $ cd tramcar
 $ npm install
 $ cp secrets.js.example secrets.js
+$ bin/mongoimport -d tramcar_development -c countries  < countries.dump
 $ npm start
 ```
 
-Tramcar should now be accessible on http://localhost:3000.  If your MongoDB server is not running on localhost, then update the secrets.js file to reflect the correct host.
+Tramcar should now be accessible on <http://localhost:3000>.  If your MongoDB server is not running on localhost, then update the secrets.js file to reflect the correct host.
 
-___NOTE:___ At this point, browsing http://localhost:3000 will raise a message stating `No valid site found`.  Until we have implemented a default setup form where the default site can be specified, simply log into the MongoDB client shell and issue the following:
+___NOTE:___ At this point, browsing <http://localhost:3000> will raise a message stating `No valid site found`.  Until we have implemented a default setup form where the default site can be specified, simply log into the MongoDB client shell and issue the following:
 
 ```
 $ bin/mongo tramcar_development
@@ -47,7 +48,6 @@ In the above, replace the WFH.io-related details with the appropriate values for
 
 #### 0.1.0
 
-- Add country fixtures so you can easily populate database on new deploy
 - Complete all model tests
 
 #### Short-term
