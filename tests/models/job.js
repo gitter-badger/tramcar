@@ -7,7 +7,7 @@ var Job = require('../../models/job');
 var Site = require('../../models/site');
 var User = require('../../models/user');
 
-describe('company', function () {
+describe('job', function () {
   before(function (done) {
     db.openConnection();
     Country.remove().exec();
