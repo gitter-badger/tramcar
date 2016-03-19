@@ -1,0 +1,26 @@
+extends ../layout.jade
+
+block title
+  title Contact
+
+block content
+  h1 Contact
+
+  if errors
+    p #{errors.length} error(s) prevented your e-mail from being sent
+    ol
+    for e in errors
+      li= e.msg
+
+  form(name="new", action="/contact", method="post")
+    div(class='form-group')
+      label(for='email') Name
+      input(name="name", type="text", class="form-control", value="#{contact.name ? contact.name : ''}")
+      label(for='email') E-mail
+      input(name="email", type="text", class="form-control", value="#{contact.email ? contact.email : ''}")
+      label(for='subject') Subject
+      input(name="subject", type="text", class="form-control", value="#{contact.subject ? contact.subject : ''}")
+      label(for='message') Message
+      textarea(name="message", rows='2', class='form-control') #{contact.message ? contact.message : ''}
+
+    button(type='submit', class='btn btn-default') Send

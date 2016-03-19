@@ -10,11 +10,15 @@ var session = require('express-session');
 // var Config = require('./models/config');
 var Site = require('./models/site');
 
-// Controllers
+// Routes
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var categories = require('./routes/categories')(urlencodedParser);
 var companies = require('./routes/companies')(urlencodedParser);
+var contact = require('./routes/contact')(urlencodedParser);
 var jobs = require('./routes/jobs')(urlencodedParser);
+
+// Controllers
+var jobsController = require('./controllers/jobs');
 
 // Misc
 var MongoStore = require('connect-mongo')(session);
@@ -71,8 +75,10 @@ app.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
 });
+app.get('/', jobsController.indexAction);
 app.use('/categories', categories);
 app.use('/companies', companies);
+app.use('/contact', contact);
 app.use('/jobs', jobs);
 
 app.get('/auth/google_oauth2',
