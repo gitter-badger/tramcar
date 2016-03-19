@@ -1,8 +1,8 @@
 ### TODO
 
-#### 0.1.0
+#### 0.2.0
 
-- Ready to release!
+- TBD
 
 #### Short-term
 
