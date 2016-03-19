@@ -17,15 +17,18 @@ html
           a(href='/categories') Categories
         li(role='presentation')
           a(href='/companies') Companies
-        if !user
-          li(role='presentation')
-            a(href='/auth/google_oauth2') Login
-        else
+        if user
           li(role='presentation')
             a(href='/companies/new') Add Company
           li(role='presentation')
             a(href='/jobs/new') Post Job
+        li(role='presentation')
+          a(href='/contact/new') Contact
+        if user
           li(role='presentation')
             a(href='/logout') Logout
+        else
+          li(role='presentation')
+            a(href='/auth/google_oauth2') Login
 
       block content
