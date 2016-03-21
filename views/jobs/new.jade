@@ -7,10 +7,12 @@ block content
   h1 Post Job
 
   if errors
-    p #{errors.length} error(s) prevented this job from saving
-    ol
-    for e in errors
-      li= e.msg
+    div(class='panel panel-danger')
+      div(class='panel-heading') #{errors.length} error(s) prevented this job from saving
+      div(class='panel-body')
+        ol
+        for e in errors
+          li= e.msg
 
   form(name="new", action="/jobs", method="post")
     div(class='form-group')
