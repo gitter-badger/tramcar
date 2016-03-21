@@ -7,10 +7,12 @@ block content
   h1 Contact
 
   if errors
-    p #{errors.length} error(s) prevented your e-mail from being sent
-    ol
-    for e in errors
-      li= e.msg
+    div(class='panel panel-danger')
+      div(class='panel-heading') #{errors.length} error(s) prevented this e-mail from being sent
+      div(class='panel-body')
+        ol
+        for e in errors
+          li= e.msg
 
   form(name="new", action="/contact", method="post")
     div(class='form-group')
