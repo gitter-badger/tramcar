@@ -21,7 +21,7 @@ describe('country', function () {
     });
 
     it('saves new record', function (done) {
-      var country = new Country({name: 'Canada'});
+      var country = new Country({name: 'CountryCountry1'});
       country.save(function (err) {
         should.not.exist(err);
         done();
@@ -29,10 +29,10 @@ describe('country', function () {
     });
 
     it('does not save duplicate record', function (done) {
-      var country = new Country({name: 'Canada'});
+      var country = new Country({name: 'CountryCountry1'});
       country.save(function (err) {
         if (err) throw err;
-        var duplicate = new Country({name: 'Canada'});
+        var duplicate = new Country({name: 'CountryCountry1'});
         duplicate.save(function (err) {
           should.exist(err);
           done();
