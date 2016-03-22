@@ -33,18 +33,18 @@ describe('job', function () {
     var _job;
 
     before(function (done) {
-      site = new Site({hostname: 'www.tramcar.org', displayName: 'Tramcar', defaultSite: true});
+      site = new Site({hostname: 'www.jobsite1.com', displayName: 'JobSite1', defaultSite: true});
       site.save();
       user = new User({uid: 'b832727d-b682-4911-87fb-5e0a0f895406', name: 'Abc Def', _site: site.id});
       user.save();
-      country = new Country({name: 'Canada'});
+      country = new Country({name: 'JobCountry1'});
       country.save();
-      category = new Category({name: 'Software Development', _site: site.id});
+      category = new Category({name: 'JobCategory1', _site: site.id});
       category.save();
-      company = new Company({name: 'WFH.io', url: 'https://www.wfh.io', twitter: '@WFHio'});
+      company = new Company({name: 'JobCompany1', url: 'https://www.jobcompany1.com', twitter: '@jobcompany1'});
       company.save();
 
-      _job = new Job({title: 'Software Developer',
+      _job = new Job({title: 'JobCategory1',
                      description: 'Test description here',
                      application_info: 'https://www.wfh.io/dummy/job',
                      email: 'doesnotexist@wfh.io',
