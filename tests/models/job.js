@@ -48,11 +48,11 @@ describe('job', function () {
                      description: 'Test description here',
                      application_info: 'https://www.wfh.io/dummy/job',
                      email: 'doesnotexist@wfh.io',
+                     country: country.name,
                      _site: site.id,
                      _user: user.id,
                      _category: category.id,
-                     _company: company.id,
-                     _country: country.id});
+                     _company: company.id});
 
       done();
     });
@@ -159,13 +159,12 @@ describe('job', function () {
       });
     });
 
-    it('does not save without a _country reference', function (done) {
+    it('does save without a country reference', function (done) {
       var clone = JSON.parse(JSON.stringify(_job));
-      delete clone._country;
+      delete clone.country;
       var job = new Job(clone);
       job.save(function (err) {
-        should.exist(err);
-        err.errors._country.message.should.equal('_country cannot be blank');
+        should.not.exist(err);
         done();
       });
     });
