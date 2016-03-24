@@ -48,10 +48,10 @@ block content
       h4
         mark Application Info
       p(style='white-space:pre-wrap;')!= sanitizeHtml(converter.makeHtml(job.application_info))
-      if job._country
+      if job.country
         h4
           mark Country
-        p(style='white-space:pre-wrap;')= job._country.name
+        p(style='white-space:pre-wrap;')= job.country
       h4
         mark Location
       p(style='white-space:pre-wrap;')= job.location

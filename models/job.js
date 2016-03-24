@@ -10,11 +10,12 @@ var jobSchema = mongoose.Schema(
     email: { type: String, required: 'email cannot be blank' },
     paid_at: { type: Date },
     expired_at: { type: Date },
+    country: { type: String },
     _site: { type: Schema.Types.ObjectId, ref: 'Site', required: '_site cannot be blank' },
     _user: { type: Schema.Types.ObjectId, ref: 'User', required: '_user cannot be blank' },
     _category: { type: Schema.Types.ObjectId, ref: 'Category', required: '_category cannot be blank' },
-    _company: { type: Schema.Types.ObjectId, ref: 'Company', required: '_company cannot be blank' },
-    _country: { type: Schema.Types.ObjectId, ref: 'Country', required: '_country cannot be blank' }
+    _company: { type: Schema.Types.ObjectId, ref: 'Company', required: '_company cannot be blank' }
+
   },
   {
     timestamps: true

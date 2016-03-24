@@ -44,15 +44,15 @@ block content
       label(for='application_info') Application Info
       textarea(name="application_info", rows='2', class='form-control')= job.application_info
     div(class='form-group')
-      label(for='_country') Country
-      select(name="_country", class='form-control')
+      label(for='country') Country
+      select(name="country", class='form-control')
         option(value="" selected)
         each country in countries
           //- TODO: find a better way to do this
-          if job._country == country.id
-            option(value="#{country.id}" selected)= country.name
+          if job.country == country.name
+            option(value="#{country.name}" selected)= country.name
           else
-            option(value="#{country.id}")= country.name
+            option(value="#{country.name}")= country.name
     div(class='form-group')
       label(for='location') Location
       textarea(name="location", class='form-control')= job.location

@@ -28,11 +28,6 @@ var jobsController = {
     var errors = req.validationErrors();
 
     var job = new Job();
-    // TODO: MySQL will puke if we insert an empty string into an integer column,
-    //       we need to find a better way to handle this
-    if (req.body._country === '') {
-      req.body._country = null;
-    }
     job.set(req.body);
     // NOTE: paid_at should only get set when the job is paid, this
     //       will need to be updated once we have a method to pay
@@ -51,13 +46,16 @@ var jobsController = {
       });
     } else {
       job.save(function (err) {
-        if (err) next(err);
-        res.redirect('/jobs/' + job.id);
-      });
-      Company.findOne({_site: req.siteID, _id: job._company}, function (err, company) {
-        if (err) next(err);
-        company._jobs.push(job);
-        company.save();
+        if (err) {
+          next(err);
+        } else {
+          Company.findOne({_site: req.siteID, _id: job._company}, function (err, company) {
+            if (err) next(err);
+            company._jobs.push(job);
+            company.save();
+          });
+          res.redirect('/jobs/' + job.id);
+        }
       });
     }
   },
@@ -77,7 +75,7 @@ var jobsController = {
   showAction: function showAction (req, res, next) {
     Job
       .findOne({_site: req.siteID, _id: req.params.id})
-      .populate('_company _category _country _user')
+      .populate('_company _category _user')
       .exec(function (err, job) {
         if (err) next(err);
         if (job) {
@@ -113,11 +111,6 @@ var jobsController = {
             });
           });
         } else {
-          // TODO: MySQL will puke if we insert an empty string into an integer column,
-          //       we need to find a better way to handle this
-          if (req.body._country === '') {
-            req.body._country = null;
-          }
           job
             .update(req.body, function (err) {
               if (err) next(err);
