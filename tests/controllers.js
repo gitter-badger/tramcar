@@ -1,6 +1,6 @@
 var request = require('supertest');
+var db = require('../db');
 var app = require('../app');
-var mongoose = require('../db');
 var Category = require('../models/category');
 var Company = require('../models/company');
 var Country = require('../models/country');
@@ -16,23 +16,24 @@ var user;
 var site;
 
 before(function (done) {
-  mongoose.connection.db.dropDatabase();
+  db.openConnection();
+  Category.remove().exec();
+  Company.remove().exec();
+  Country.remove().exec();
+  Job.remove().exec();
+  Site.remove().exec();
+  User.remove().exec();
 
-  country = new Country({name: 'Canada'});
+  country = new Country({name: 'ControllerCountry1'});
   country.save();
-
-  site = new Site({hostname: 'www.tramcar.org', displayName: 'Tramcar', defaultSite: true});
+  site = new Site({hostname: 'www.controllersite1.com', displayName: 'ControllerSite1', defaultSite: true});
   site.save();
-
-  user = new User({uid: 'b832727d-b682-4911-87fb-5e0a0f895406', name: 'Abc Def', _site: site.id});
+  user = new User({uid: 'b832727d-b682-4911-87fb-5e0a0f895406', name: 'ControllerUser1', _site: site.id});
   user.save();
-
-  category = new Category({_site: site._id, name: 'test'});
+  category = new Category({_site: site._id, name: 'ControllerCategory1'});
   category.save();
-
-  company = new Company({_site: site._id, _user: user.id, name: 'Tramcar', url: 'https://www.tramcar.org'});
+  company = new Company({_site: site._id, _user: user.id, name: 'ControllerCompany1', url: 'https://www.controllercompany1.com'});
   company.save();
-
   job = new Job({_site: site._id,
                  _user: user._id,
                  _company: company._id,
@@ -48,24 +49,8 @@ before(function (done) {
 });
 
 after(function (done) {
-  // NOTE: Not sure why we need to nest these but not the creations above,
-  // however these don't seem to remove when we don't.
-  category.remove(function (err, r) {
-    if (err) throw err;
-    company.remove(function (err, r) {
-      if (err) throw err;
-      user.remove(function (err, r) {
-        if (err) throw err;
-        site.remove(function (err, r) {
-          if (err) throw err;
-          job.remove(function (err, r) {
-            if (err) throw err;
-            done();
-          });
-        });
-      });
-    });
-  });
+  db.closeConnection();
+  done();
 });
 
 describe('/categories', function () {

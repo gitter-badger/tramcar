@@ -3,19 +3,19 @@ var should = require('should');
 var Category = require('../../models/category');
 var Site = require('../../models/site');
 
+before(function (done) {
+  db.openConnection();
+  Category.remove().exec();
+  Site.remove().exec();
+  done();
+});
+
+after(function (done) {
+  db.closeConnection();
+  done();
+});
+
 describe('category', function () {
-  before(function (done) {
-    db.openConnection();
-    Category.remove().exec();
-    Site.remove().exec();
-    done();
-  });
-
-  after(function (done) {
-    db.closeConnection();
-    done();
-  });
-
   describe('saving', function () {
     var site1;
     var site2;

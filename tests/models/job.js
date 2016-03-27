@@ -10,12 +10,12 @@ var User = require('../../models/user');
 describe('job', function () {
   before(function (done) {
     db.openConnection();
-    Country.remove().exec();
-    Job.remove().exec();
     Category.remove().exec();
     Company.remove().exec();
-    User.remove().exec();
+    Country.remove().exec();
+    Job.remove().exec();
     Site.remove().exec();
+    User.remove().exec();
     done();
   });
 
