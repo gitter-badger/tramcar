@@ -41,18 +41,20 @@ var categoriesController = {
       res.render('categories/new', {category: category, errors: errors});
     } else {
       category.save(function (err) {
-        // Need to find a way to move this into middleware etc.
-        if (err.code === 11000) {
-          var error = {};
-          error.param = 'name';
-          error.msg = 'Duplicate name';
-          error.value = '';
-          res.render('categories/new', {category: category, errors: [error]});
+        if (err) {
+          // Need to find a way to move this into middleware etc.
+          if (err.code === 11000) {
+            var error = {};
+            error.param = 'name';
+            error.msg = 'Duplicate name';
+            error.value = '';
+            res.render('categories/new', {category: category, errors: [error]});
+          } else {
+            next(err);
+          }
         } else {
-          next(err);
+          res.redirect('/categories');
         }
-
-        res.redirect('/categories');
       });
     }
   },

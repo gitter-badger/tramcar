@@ -4,7 +4,8 @@ services:
 node_js:
   - "4.2"
 before_script:
-  - npm install -g gulp
   - cp -a secrets.js.example secrets.js
-script: gulp
-
+script:
+  - NODE_ENV=test node_modules/.bin/mocha --no-timeouts tests/models
+  - NODE_ENV=test node_modules/.bin/mocha --no-timeouts tests/controllers.js
+  - NODE_ENV=test node_modules/eslint/bin/eslint.js .

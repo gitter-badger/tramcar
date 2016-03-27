@@ -4,13 +4,15 @@ var connection = require('./secrets')['mongo'][env]['connection'];
 
 var db = {
   openConnection: function openConnection () {
-    mongoose.connect('mongodb://' + connection.host + '/' + connection.database);
+    if (mongoose.connection.readyState === 0) {
+      mongoose.connect('mongodb://' + connection.host + '/' + connection.database);
 
-    var db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection error:'));
-    db.once('open', function () {
-      // we're connected!
-    });
+      var db = mongoose.connection;
+      db.on('error', console.error.bind(console, 'connection error:'));
+      db.once('open', function () {
+        // we're connected!
+      });
+    }
   },
   closeConnection: function closeConnection () {
     mongoose.connection.close();

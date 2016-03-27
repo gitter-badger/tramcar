@@ -8,8 +8,8 @@ describe('company', function () {
   before(function (done) {
     db.openConnection();
     Company.remove().exec();
-    User.remove().exec();
     Site.remove().exec();
+    User.remove().exec();
     done();
   });
 
