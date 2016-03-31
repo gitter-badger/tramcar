@@ -1,5 +1,7 @@
 ### Welcome!
 
+[![Join the chat at https://gitter.im/wfhio/tramcar](https://badges.gitter.im/wfhio/tramcar.svg)](https://gitter.im/wfhio/tramcar?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Tramcar is a self-hosted job board written in JavaScript.  As you can see by looking at the code, this project is still in its infancy and things are likely to change drastically over the coming months.  We would recommend holding off on using this software in any serious capacity until we have made several releases and key decisions have been made.  No security considerations have been made up to this point and it is likely that you will be running in an insecure capacity if you deploy this to production today.
 
 With that said, we would love for your involvement so please do test what we have today and let us know what does not work and what needs improvement.  This is our first JavaScript (Node.js) project and we are fully aware that we still have a lot to learn!  :)
